@@ -56,28 +56,41 @@
 ## 📂 파일 구조
 
 ```text
-├── index.html                     # 대시보드 메인 웹 애플리케이션
-├── top50_full_data.json           # 50개 호텔 전체 상세 데이터셋
-├── authentic_gmaps_proofs.json    # 구글 실데이터 리뷰 및 스크린샷 메타데이터
-├── build_index_html_v2.mjs        # 대시보드 HTML 자동 빌더
-├── build_top50_full_data.mjs      # 50개 호텔 데이터셋 통합 빌더
-├── verify_dashboard_v2.mjs        # 무결성 및 링크 자동 검증 스크립트
-├── evidence_gmaps_*.png           # 실제 구글 리뷰 패널 스크린샷 증빙 (5종)
-├── rendered_preview_top50.png     # 대시보드 전체 렌더링 프리뷰
-└── modal_preview_top50.png        # 리뷰 모달 팝업 프리뷰
+├── index.html                     # [v1 대시보드] 전체 검색 기준 상위 50선 (5성급·프리미엄 위주)
+├── taiwan-hotel_v2.html           # [v2 대시보드] 1박당 10,000~15,000 마일 가성비 구간 50선 (신규 장단점 컬럼 포함)
+├── top50_full_data.json           # v1 50개 호텔 전체 상세 데이터셋
+├── crawled_v2_exact_10k_15k.json  # v2 10k~15k 마일 구간 51개 호텔 크롤링 데이터
+├── generate_taiwan_hotel_v2.mjs   # v2 대시보드 HTML 생성 빌더
+├── verify_v2_dashboard.mjs        # v2 대시보드 자동 무결성 및 렌더링 검증기
+├── rendered_preview_v2_10k_head.png # v2 헤더, 추천 챕터, 지도 프리뷰
+├── modal_preview_v2_10k.png       # v2 실리뷰 8선 모달 팝업 프리뷰
+└── table_preview_v2_10k.png       # v2 장단점 컬럼 포함 비교표 프리뷰
 ```
+
+---
+
+## 🚀 대시보드 버전별 특징
+
+| 구분 | `index.html` (v1 대시보드) | `taiwan-hotel_v2.html` (v2 대시보드) |
+| :--- | :--- | :--- |
+| **선정 기준** | 에미레이트 검색 상위 50개 (추천순) | **1박당 10,000 ~ 15,000 마일 가성비 구간 (필터 적용)** |
+| **주요 호텔군** | 메트로폴리탄, W타이베이, 리젠트, 하얏트 등 4~5성급 | 시티인, 에어라인 인, 스위오, 로열인 등 3~4성급 가성비 체인 |
+| **추가 컬럼** | - | **★ 너가 꼽은 장점 & 단점 (AI 심층 분석)** 컬럼 신규 추가 |
+| **#너의 추천 챕터** | 실패 없는 최고 호텔 5선 | **10,000~15,000 마일 최고 가성비 5선 (소음·담배 무결점)** |
+| **지도 상태** | 고화질 Esri ArcGIS World Street Map | 고화질 Esri ArcGIS World Street Map (깨짐 현상 완벽 개선) |
 
 ---
 
 ## 🛠 실행 방법
 
-1. 브라우저에서 `index.html` 파일을 직접 열람합니다:
+1. 브라우저에서 원하는 대시보드를 직접 열람합니다:
    ```bash
-   start index.html
+   start index.html              # v1: 럭셔리/프리미엄 50선 대시보드
+   start taiwan-hotel_v2.html    # v2: 10,000~15,000 마일 가성비 50선 대시보드
    ```
-2. 데이터 재빌드 및 정합성 검증 테스트 실행:
+2. v2 데이터 재빌드 및 정합성 검증 테스트:
    ```bash
-   node build_top50_full_data.mjs
-   node build_index_html_v2.mjs
-   node verify_dashboard_v2.mjs
+   node generate_taiwan_hotel_v2.mjs
+   node verify_v2_dashboard.mjs
    ```
+
